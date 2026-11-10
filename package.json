@@ -1,0 +1,78 @@
+{
+  "name": "pages-orange",
+  "version": "1.2.0",
+  "description": "Pages orange — carnet de relations professionnelles",
+  "main": "electron/main.cjs",
+  "author": "Pages orange",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:mac": "electron-builder --mac dmg zip --universal --publish never",
+    "dist:win": "electron-builder --win nsis --publish never"
+  },
+  "devDependencies": {
+    "electron": "^35.7.5",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "fr.pagesorange.desktop",
+    "productName": "Pages orange",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "app.js",
+      "styles.css",
+      "manifest.webmanifest",
+      "sw.js",
+      "assets/**/*",
+      "electron/**/*"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "category": "public.app-category.business",
+      "artifactName": "Pages-orange-${version}-mac-${arch}.${ext}",
+      "icon": "assets/icon.icns"
+    },
+    "dmg": {
+      "title": "Pages orange",
+      "artifactName": "Pages-orange-${version}-mac-${arch}.${ext}"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Pages-orange-${version}-windows-${arch}.${ext}",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Pages orange"
+    }
+  }
+}

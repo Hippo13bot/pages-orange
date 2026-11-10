@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111318"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Pages Orange"><link rel="apple-touch-icon" href="./assets/apple-touch-icon.png"><meta name="description" content="Pages orange — votre réseau professionnel, organisé intelligemment">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./styles.css">
+<title>Pages orange</title>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="logo"><img class="brand-gif" src="./assets/dog.gif" alt=""/><span>Pages <b>orange</b></span></div>
+  <div class="nav-caption">ESPACE DE TRAVAIL</div>
+  <button class="nav active" data-page="home"><i>⌂</i><span>Accueil</span></button>
+  <button class="nav" data-page="contacts"><i>♙</i><span>Contacts</span><span id="navContacts" class="nav-num">0</span></button>
+  <button class="nav" data-page="exchanges"><i>↗</i><span>Connexions</span><span id="navImports" class="nav-num">0</span></button>
+  <button class="nav" data-page="projects"><i>◇</i><span>Projets</span></button>
+  <button class="nav" data-page="tools"><i>▦</i><span>Outils</span></button>
+  <div class="sidebar-foot"><span class="green-dot"></span><span id="storageState">Stockage local actif</span></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="mobile-logo"><img class="brand-gif" src="./assets/dog.gif" alt=""/> Pages <b>orange</b></div><div id="pageTitle" class="page-crumb">Vue d'ensemble</div><div class="top-actions"><span class="privacy-pill">● Privé par défaut</span><button class="btn primary" id="topAdd">＋ Nouveau contact</button></div></header>
+
+<section class="page show" id="page-home">
+  <div class="hero"><div><div class="kicker">VOTRE RÉSEAU PROFESSIONNEL</div><h1>Votre carnet d'adresses,<br><em>enfin intelligent.</em></h1><p>Centralisez vos contacts, vos échanges, vos projets et vos relations.</p><div class="hero-actions"><button class="btn primary" id="heroAdd">＋ Ajouter un contact</button><button class="btn light" id="heroImport">Connecter mes contacts ↗</button></div></div><div class="hero-symbol"><img src="./assets/dog.gif" alt="Mascotte Pages orange"></div></div>
+  <div class="metrics">
+    <article class="metric"><span>Contacts</span><strong id="mContacts">0</strong><small>Dans votre répertoire</small></article>
+    <article class="metric"><span>À vérifier</span><strong id="mReview">0</strong><small>Imports en attente</small></article>
+    <article class="metric"><span>Entreprises</span><strong id="mCompanies">0</strong><small>Organisations liées</small></article>
+    <article class="metric"><span>Relances à venir</span><strong id="mReminders">0</strong><small>Suivis programmés</small></article>
+  </div>
+  <div class="columns">
+    <article class="panel"><div class="panel-title"><div><h2>Actions rapides</h2><p>Que souhaitez-vous faire ?</p></div></div>
+      <button class="quick" id="quickContact"><span class="quick-icon">＋</span><span><b>Créer une fiche contact</b><small>Ajouter une personne manuellement</small></span><span>›</span></button>
+      <button class="quick" id="quickCapture"><span class="quick-icon">↗</span><span><b>Connecter mes contacts</b><small>Téléphone, WhatsApp et Instagram</small></span><span>›</span></button>
+      <button class="quick" id="quickFile"><span class="quick-icon">⇧</span><span><b>Importer un carnet existant</b><small>CSV, vCard, JSON</small></span><span>›</span></button>
+      <button class="quick" data-open="reminders"><span class="quick-icon">◷</span><span><b>Voir les relances</b><small>Suivre les prochaines actions</small></span><span>›</span></button>
+    </article>
+    <article class="panel"><div class="panel-title"><div><h2>Contacts récents</h2><p>Dernières fiches ajoutées</p></div><button class="link" data-open="contacts">Tout voir →</button></div><div id="recent" class="empty">Aucun contact enregistré.</div></article>
+  </div>
+  <div class="privacy-note"><b>Confidentialité d'abord.</b> Cette version traite les captures localement dans le navigateur. Aucun contenu de conversation n'est envoyé à un service d'IA. La synchronisation cloud est désactivée tant que vous ne configurez pas votre propre projet.</div>
+</section>
+
+<section class="page" id="page-contacts">
+  <div class="heading"><div><div class="kicker">VOTRE CARNET D'ADRESSES</div><h1>Contacts</h1><p>Personnes, coordonnées, entreprises et relations professionnelles.</p><button class="link sublink" data-open="companies">Voir les entreprises associées →</button></div><button class="btn primary" id="addContact">＋ Nouveau contact</button></div>
+  <div class="toolbar"><input id="contactSearch" class="search" placeholder="Rechercher nom, société, métier, e-mail, tag…"><select id="contactTag"><option value="">Toutes les catégories</option></select><select id="contactSort"><option value="recent">Plus récents</option><option value="az">Nom A → Z</option><option value="company">Entreprise</option></select></div>
+  <div id="contactsGrid" class="cards empty">Votre répertoire est vide. Créez une fiche ou importez vos contacts.</div>
+</section>
+
+<section class="page" id="page-imports">
+  <div class="heading"><div><div class="kicker">AJOUT AUTOMATIQUE</div><h1>Connecter mes contacts</h1><p>Choisissez une source. Pages Orange ajoute les fiches et écarte les doublons.</p></div></div>
+  <div class="connect-grid">
+    <article class="panel connect-card featured"><div class="connect-number">01</div><div class="connect-icon">♙</div><h2>Contacts du téléphone</h2><p>Importez plusieurs contacts en une seule fois. Sélectionnez-les dans la fenêtre qui s'ouvre : Pages Orange crée les fiches automatiquement.</p><button class="btn primary" id="deviceContacts" type="button">Choisir mes contacts</button><p class="small-note" id="deviceContactsHelp">Sur les navigateurs compatibles, vous pouvez sélectionner plusieurs contacts et autoriser uniquement leur partage.</p>
+      <div class="iphone-steps"><b>Sur iPhone (Safari)</b><ol><li>Ouvrez l'application <b>Contacts</b>.</li><li>Dans <b>Listes</b>, maintenez la liste à exporter, puis choisissez <b>Exporter</b> (si proposé par votre version d’iOS).</li><li>Enregistrez le fichier de contacts dans l’app <b>Fichiers</b>.</li><li>Revenez ici et importez le fichier <b>.vcf</b> avec le bouton ci-dessous.</li></ol><label class="file-row">Importer le fichier de contacts (.vcf)<input type="file" id="vcfFile" accept=".vcf,text/vcard"></label></div>
+    </article>
+    <article class="panel connect-card"><div class="connect-number">02</div><div class="connect-icon">◎</div><h2>WhatsApp et Instagram</h2><p>Pour chaque personne, partagez son profil ou copiez ses coordonnées, puis collez-les ci-dessous. La fiche est préparée et ajoutée au répertoire après validation.</p><label class="cloud-label">D’où vient le contact ?<select id="sharedSource"><option>WhatsApp</option><option>Instagram</option><option>SMS</option><option>E-mail</option><option>Autre</option></select></label><label class="cloud-label">Profil, nom, numéro ou coordonnées<textarea id="sharedText" rows="5" placeholder="Collez ici le lien du profil, le nom ou les coordonnées…"></textarea></label><button class="btn primary" id="parseSharedText" type="button">Préparer et ajouter la fiche</button><p class="small-note">WhatsApp et Instagram ne donnent pas accès à tous vos contacts privés depuis une application web. Vous choisissez les profils que vous partagez.</p>
+    </article>
+    <article class="panel connect-card"><div class="connect-number">03</div><div class="connect-icon">☁</div><h2>Retrouver mes contacts partout</h2><p>Connectez votre compte Pages Orange pour synchroniser automatiquement les fiches ajoutées sur votre Mac et votre iPhone.</p><ol class="simple-steps"><li>Ouvrez <b>Outils</b> dans le menu.</li><li>Dans « Synchronisation cloud », créez votre compte ou connectez-vous.</li><li>Les prochaines fiches seront synchronisées automatiquement.</li></ol><button class="btn secondary" data-open="exports">Configurer la synchronisation</button><p class="small-note">La synchronisation cloud est différente de l’accès au carnet d’adresses : elle conserve les contacts déjà importés dans Pages Orange.</p>
+    </article>
+  </div>
+  <details class="advanced-import"><summary>Autres imports et captures d’écran</summary><div class="import-grid">
+    <article class="panel"><h2>Importer un fichier</h2><p>Pour un carnet exporté ou une sauvegarde existante.</p><label class="file-row">CSV (tableur)<input type="file" id="csvFile" accept=".csv,text/csv"></label><label class="file-row">Sauvegarde Pages Orange (JSON)<input type="file" id="jsonFile" accept=".json,application/json"></label></article>
+    <article class="panel"><h2>Analyser une capture</h2><p>Vous pouvez aussi analyser une capture d’écran d’un profil ou d’une carte de visite.</p><div class="drop" id="drop"><label class="btn secondary file-btn">Choisir une image<input type="file" id="images" accept="image/*" multiple></label><small>Traitement OCR dans le navigateur.</small></div></article>
+  </div></details>
+  <div id="importLog"></div>
+</section>
+<section class="page" id="page-companies">
+  <div class="heading"><div><div class="kicker">ORGANISATIONS</div><h1>Entreprises</h1><p>Retrouvez les sociétés et les personnes qui y travaillent.</p></div><button class="btn primary" id="addCompany">＋ Entreprise</button></div>
+  <div id="companiesList" class="cards empty">Aucune entreprise enregistrée.</div>
+</section>
+
+<section class="page" id="page-projects">
+  <div class="heading"><div><div class="kicker">COLLABORATIONS</div><h1>Projets</h1><p>Associez vos contacts à vos tournages, productions et collaborations.</p></div><button class="btn primary" id="addProject">＋ Nouveau projet</button></div>
+  <div id="projectsList" class="cards empty">Aucun projet enregistré.</div>
+</section>
+
+<section class="page" id="page-reminders">
+  <div class="heading"><div><div class="kicker">SUIVI RELATIONNEL</div><h1>Relances</h1><p>Gardez le fil de vos échanges et de vos prochains suivis.</p></div><button class="btn primary" id="addReminder">＋ Programmer une relance</button></div>
+  <div id="remindersList" class="panel empty">Aucune relance programmée.</div>
+</section>
+
+<section class="page" id="page-exports">
+  <div class="heading"><div><div class="kicker">GESTION DE L’APPLICATION</div><h1>Outils</h1><p>Imports, exports, connexions, sauvegardes et préférences.</p><button class="link sublink" data-open="settings">Paramètres et confidentialité →</button></div></div>
+  <div class="settings-grid">
+    <article class="panel"><h2>Exporter votre répertoire</h2><p>Emportez vos contacts dans des formats courants.</p><div class="stack"><button class="btn secondary" id="exportCSV">Exporter en CSV</button><button class="btn secondary" id="exportVCF">Exporter en vCard</button><button class="btn secondary" id="exportPDF">Imprimer / enregistrer en PDF</button><button class="btn secondary" id="exportJSON">Sauvegarde complète JSON</button></div></article>
+    <article class="panel"><h2>Notion — synchronisation bidirectionnelle</h2><p>Pages orange reste la base principale. Notion peut recevoir et renvoyer les modifications après configuration de l'intégration.</p><div class="connection"><span>État de la connexion</span><b class="status planned">Non configurée</b></div><p class="small-note">Nécessite une intégration Notion, une base partagée avec celle-ci et un backend sécurisé. Ne collez jamais un secret Notion dans le navigateur.</p><button class="btn secondary" id="notionInfo">Voir les étapes de configuration</button></article>
+    <article class="panel cloud-panel"><h2>Synchronisation cloud — Supabase</h2><p>Connectez votre espace Pages orange pour retrouver vos contacts et projets sur vos appareils.</p>
+      <label class="cloud-label">URL du projet Supabase<input id="sbUrl" type="url" placeholder="https://xxxxx.supabase.co" autocomplete="url"></label>
+      <label class="cloud-label">Clé publique (anon / publishable)<input id="sbKey" type="password" placeholder="sb_publishable_… ou clé anon" autocomplete="off"></label>
+      <div class="cloud-divider"></div>
+      <label class="cloud-label">Adresse e-mail<input id="sbEmail" type="email" placeholder="vous@exemple.fr" autocomplete="email"></label>
+      <label class="cloud-label">Mot de passe<input id="sbPassword" type="password" placeholder="8 caractères minimum" autocomplete="current-password"></label>
+      <div class="cloud-actions"><button class="btn secondary" id="sbConfigure">Enregistrer la configuration</button><button class="btn primary" id="sbSignup">Créer mon compte</button><button class="btn primary" id="sbLogin">Se connecter</button></div>
+      <div class="connection"><span>État de la synchronisation</span><b id="sbStatus" class="status planned">Non configurée</b></div>
+      <p id="sbAccount" class="small-note">Vos données restent locales jusqu'à la connexion. La première synchronisation fusionnera les fiches locales et celles du cloud.</p>
+      <div class="cloud-actions"><button class="btn secondary" id="sbSync" disabled>Synchroniser maintenant</button><button class="btn secondary" id="sbLogout" disabled>Se déconnecter</button></div>
+      <p class="small-note">Utilisez uniquement la clé publique du projet, jamais la clé service_role. Les captures restent analysées localement ; seule la base Pages orange est synchronisée.</p>
+    </article>
+    <article class="panel"><h2>Sources et limites d'accès</h2><div class="source-line"><b>Gmail</b><span>Connexion OAuth possible</span></div><div class="source-line"><b>Instagram</b><span>API selon type de compte et autorisations</span></div><div class="source-line"><b>WhatsApp</b><span>Exports et intégrations Business autorisées</span></div><div class="source-line"><b>SMS iPhone</b><span>Captures et imports ; pas de lecture générale par une PWA</span></div></article>
+  </div>
+</section>
+
+<section class="page" id="page-settings">
+  <div class="heading"><div><div class="kicker">PRÉFÉRENCES</div><h1>Paramètres</h1><p>Confidentialité, sauvegarde et gestion des données.</p></div></div>
+  <div class="settings-grid">
+    <article class="panel"><h2>Stockage local</h2><p>Vos données sont conservées dans le navigateur de cet appareil.</p><div class="connection"><span>Contacts</span><b id="settingCount">0</b></div><div class="connection"><span>Sources d'import</span><b id="settingImports">0</b></div><button class="btn secondary" id="settingsBackup">Télécharger une sauvegarde</button></article>
+    <article class="panel"><h2>Confidentialité des captures</h2><p>Les images sont lues localement. Le texte extrait est conservé dans l'historique d'import pour assurer la traçabilité.</p><p class="small-note">Vous pouvez supprimer un import et ses données depuis le journal. N'importez que les conversations que vous êtes autorisé à traiter.</p></article>
+    <article class="panel"><h2>Équipe et comptes</h2><p>Le modèle de données prévoit un propriétaire et des espaces de travail. Les invitations, rôles et permissions seront activés avec le backend.</p><span class="status planned">Architecture évolutive</span></article>
+    <article class="panel"><h2>Zone sensible</h2><p>Cette action efface les données Pages orange de ce navigateur. Exportez une sauvegarde avant de continuer.</p><button class="btn danger" id="wipe">Effacer les données locales</button></article>
+  </div>
+</section>
+</main>
+</div>
+
+<dialog id="contactModal" class="modal"><form id="contactForm" method="dialog">
+<div class="modal-head"><div><div class="kicker">FICHE PROFESSIONNELLE</div><h2 id="contactModalTitle">Nouveau contact</h2></div><button type="button" class="x" data-close="contactModal">×</button></div>
+<input type="hidden" id="cId"><div class="form-grid">
+<label>Prénom<input id="cFirst"></label><label>Nom<input id="cLast"></label><label>Métier / fonction<input id="cJob" placeholder="Réalisateur, chef opérateur…"></label><label>Entreprise<input id="cCompany"></label><label>E-mail<input id="cEmail" type="email"></label><label>Téléphone<input id="cPhone" type="tel"></label><label>Instagram / pseudo<input id="cInstagram"></label><label>LinkedIn<input id="cLinkedin"></label><label>Site web<input id="cWebsite"></label><label>Ville<input id="cCity"></label><label>Catégories / tags<input id="cTags" placeholder="Audiovisuel, client, réalisateur"></label><label>Priorité<select id="cPriority"><option value="normal">Normale</option><option value="important">Importante</option><option value="vip">VIP</option></select></label><label class="wide">Notes<textarea id="cNotes" rows="3"></textarea></label>
+</div><div class="modal-actions"><button type="button" class="btn secondary" data-close="contactModal">Annuler</button><button type="submit" class="btn primary">Enregistrer</button></div>
+</form></dialog>
+
+<dialog id="reviewModal" class="modal"><form id="reviewForm" method="dialog">
+<div class="modal-head"><div><div class="kicker">IMPORT À VÉRIFIER</div><h2>Informations détectées</h2></div><button type="button" class="x" data-close="reviewModal">×</button></div>
+<p class="muted">Les propositions sont extraites du contenu visible. Les informations non certaines restent vides.</p>
+<div class="form-grid"><label>Prénom<input id="rFirst"></label><label>Nom<input id="rLast"></label><label>Métier<input id="rJob"></label><label>Entreprise<input id="rCompany"></label><label>E-mail<input id="rEmail"></label><label>Téléphone<input id="rPhone"></label><label>Instagram / pseudo<input id="rInstagram"></label><label>Source<select id="rSource"><option>Capture Instagram</option><option>Capture WhatsApp</option><option>Capture SMS</option><option>Capture e-mail</option><option>Capture / document</option></select></label><label class="wide">Texte extrait<textarea id="rText" rows="6" readonly></textarea></label></div>
+<div class="modal-actions"><button type="button" class="btn secondary" data-close="reviewModal">Ignorer</button><button type="submit" class="btn primary">Ajouter au répertoire</button></div>
+</form></dialog>
+
+<dialog id="simpleModal" class="modal"><form id="simpleForm" method="dialog"><div class="modal-head"><h2 id="simpleTitle">Ajouter</h2><button type="button" class="x" data-close="simpleModal">×</button></div><div id="simpleFields" class="form-grid"></div><div class="modal-actions"><button type="button" class="btn secondary" data-close="simpleModal">Annuler</button><button type="submit" class="btn primary">Enregistrer</button></div></form></dialog>
+<div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script src="./app.js"></script>
+</body></html>
