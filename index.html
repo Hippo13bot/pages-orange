@@ -130,5 +130,5 @@
 
 <dialog id="simpleModal" class="modal"><form id="simpleForm" method="dialog"><div class="modal-head"><h2 id="simpleTitle">Ajouter</h2><button type="button" class="x" data-close="simpleModal">×</button></div><div id="simpleFields" class="form-grid"></div><div class="modal-actions"><button type="button" class="btn secondary" data-close="simpleModal">Annuler</button><button type="submit" class="btn primary">Enregistrer</button></div></form></dialog>
 <div id="toast" class="toast"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="./app.js"></script><script src="./integrations.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script src="https://accounts.google.com/gsi/client" async defer onload="window.dispatchEvent(new Event('google-gsi-ready'))"></script><script src="./app.js"></script><script src="./integrations.js"></script>
 </body></html>
