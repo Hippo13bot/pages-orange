@@ -159,4 +159,5 @@
   });
 
   window.addEventListener('load', initGoogleOAuth);
+  window.addEventListener('google-gsi-ready', initGoogleOAuth);
 })();
